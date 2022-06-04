@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "BUNDLE_VERSION": "readonly",
+    "BUNDLE_CHAIN_FILENAME": "readonly",
+    "BUNDLE_ANALYTICS_FILENAME": "readonly",
+    "BUNDLE_LIBRARY_FILENAME": "readonly",
+    "BUNDLE_CONSOLE_CHILD_FILENAME": "readonly"
+  },
+  "extends": [
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["dist"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^debug$|^_" }
+    ],
+    "quote-props": [ "error", "consistent" ],
+    "@typescript-eslint/semi": [ "error", "always" ],
+    "no-mixed-operators": "warn",
+    "no-tabs": "warn",
+    "no-useless-escape": "warn",
+    "no-undef": ["error", { "typeof": true }],
+    "semi":["error"]
+  }
+}

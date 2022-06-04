@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2016",
+    "noImplicitAny": true,
+    "declaration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": [
+      "es2019"
+    ],
+    "outDir": "dist",
+    "baseUrl": ".",
+    "typeRoots": [
+      "../../node_modules/@types/mocha",
+      "../../node_modules/@types/node",
+      "../../node_modules/@types/web3-provider-engine",
+    ],
+    "types": [ "node", "mocha" ]
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}
