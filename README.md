@@ -1,10 +1,18 @@
-# @truffle/hdwallet-provider
+# web3-provider-nodejs
 HD Wallet-enabled Web3 provider. Use it to sign transactions for addresses derived from a 12 or 24 word mnemonic.
 
+Note: This is fork of https://www.npmjs.com/package/@truffle/hdwallet-provider with changes:
+- Explicitly provider `private` keys, `mnemomic` (or both)
+- Removed `shared Nonce` option
+- `provider.stop` is handled by environment, needless to call `provider.stop()`
 ## Install
 
 ```
-$ npm install @truffle/hdwallet-provider
+$ npm install web3-provide-nodejs
+```
+
+```
+$ yarn add web3-provide-nodejs
 ```
 
 ## Requirements
@@ -15,13 +23,12 @@ Web3 ^1.2.0
 
 ## General Usage
 
-You can use this provider wherever a Web3 provider is needed, not just in Truffle. For Truffle-specific usage, see next section.
-
-By default, the `HDWalletProvider` will use the address of the first address that's generated from the mnemonic. If you pass in a specific index, it'll use that address instead.
+You can use this provider wherever a Web3 provider is needed. Suitable for use in `Nodejs`, `Deno` runtimes where
+`window.ethereum` is not available.
 
 ### Instantiation
 
-You can instantiate `hdwallet-provider` with options passed in an object with
+You can instantiate `Web3NodejsProvider` with options passed in an object with
 named keys. You can specify the following options in your object:
 
 Parameters:
@@ -41,10 +48,11 @@ Parameters:
 Some examples can be found below:
 
 ```javascript
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const Web3NodejsProvider = require("web3-nodejs-provier");
 const Web3 = require("web3");
 const mnemonicPhrase = "mountains supernatural bird..."; // 12 word mnemonic
-let provider = new HDWalletProvider({
+
+let provider = new Web3NodejsProvider({
   mnemonic: {
     phrase: mnemonicPhrase
   },
@@ -52,14 +60,14 @@ let provider = new HDWalletProvider({
 });
 
 // Or, alternatively pass in a zero-based address index.
-provider = new HDWalletProvider({
+provider = new Web3NodejsProvider({
   mnemonic: mnemonicPhrase,
   providerOrUrl: "http://localhost:8545",
   addressIndex: 5
 });
 
 // Or, use your own hierarchical derivation path
-provider = new HDWalletProvider({
+provider = new Web3NodejsProvider({
   mnemonic: mnemonicPhrase,
   providerOrUrl: "http://localhost:8545",
   numberOfAddresses: 1,
@@ -69,7 +77,7 @@ provider = new HDWalletProvider({
 
 // To make HDWallet less "chatty" over JSON-RPC,
 // configure a higher value for the polling interval.
-provider = new HDWalletProvider({
+provider = new Web3NodejsProvider({
   mnemonic: {
     phrase: mnemonicPhrase
   },
@@ -119,52 +127,18 @@ private keys as the first parameter. When providing an array, `addressIndex`
 and `numberOfAddresses` are fully supported.
 
 ```javascript
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const Web3NodejsProvider = require("web3-nodejs-provider");
 //load single private key as string
-let provider = new HDWalletProvider("3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580", "http://localhost:8545");
+let provider = new Web3NodejsProvider("3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580", "http://localhost:8545");
 
 // Or, pass an array of private keys, and optionally use a certain subset of addresses
 const privateKeys = [
   "3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580",
   "9549f39decea7b7504e15572b2c6a72766df0281cea22bd1a3bc87166b1ca290",
 ];
-provider = new HDWalletProvider(privateKeys, "http://localhost:8545", 0, 2); //start at address_index 0 and load both addresses
+
+provider = new Web3NodejsProvider(privateKeys, "http://localhost:8545", 0, 2); //start at address_index 0 and load both addresses
 ```
 **NOTE: This is just an example. NEVER hard code production/mainnet private
 keys in your code or commit them to git. They should always be loaded from
 environment variables or a secure secret management system.**
-
-## Truffle Usage
-
-You can easily use this within a Truffle configuration. For instance:
-
-truffle-config.js
-```javascript
-const HDWalletProvider = require("@truffle/hdwallet-provider");
-
-const mnemonicPhrase = "mountains supernatural bird ...";
-
-module.exports = {
-  networks: {
-    development: {
-      host: "localhost",
-      port: 8545,
-      network_id: "*" // Match any network id
-    },
-    ropsten: {
-      // must be a thunk, otherwise truffle commands may hang in CI
-      provider: () =>
-        new HDWalletProvider({
-          mnemonic: {
-            phrase: mnemonicPhrase
-          },
-          providerOrUrl: "https://ropsten.infura.io/v3/YOUR-PROJECT-ID",
-          numberOfAddresses: 1,
-          shareNonce: true,
-          derivationPath: "m/44'/1'/0'/0/"
-        }),
-      network_id: '3',
-    }
-  }
-};
-```
