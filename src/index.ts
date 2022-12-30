@@ -44,7 +44,7 @@ import { signTypedData } from "eth-sig-util";
 // See issue #65 for more
 const singletonNonceSubProvider = new NonceSubProvider();
 
-class HDWalletProvider {
+class Web3NodejsProvider {
   private hdwallet?: EthereumHDKey;
   private walletHdpath: string;
   private wallets: { [address: string]: ethJSWallet };
@@ -85,15 +85,15 @@ class HDWalletProvider {
     });
 
     let providerToUse;
-    if (HDWalletProvider.isValidProvider(provider)) {
+    if (Web3NodejsProvider.isValidProvider(provider)) {
       providerToUse = provider;
-    } else if (HDWalletProvider.isValidProvider(url)) {
+    } else if (Web3NodejsProvider.isValidProvider(url)) {
       providerToUse = url;
     } else {
       providerToUse = providerOrUrl;
     }
 
-    if (!HDWalletProvider.isValidProvider(providerToUse)) {
+    if (!Web3NodejsProvider.isValidProvider(providerToUse)) {
       throw new Error(
         [
           `No provider or an invalid provider was specified: '${providerToUse}'`,
@@ -234,6 +234,7 @@ class HDWalletProvider {
       })
     );
 
+    // do away with share none thing
     !shareNonce
       ? this.engine.addProvider(new NonceSubProvider())
       : this.engine.addProvider(singletonNonceSubProvider);
@@ -316,7 +317,7 @@ class HDWalletProvider {
 
     // crank the addresses out
     for (let i = addressIndex; i < addressIndex + numberOfAddresses; i++) {
-      const wallet = this.hdwallet
+      const wallet: ethJSWallet = this.hdwallet
         .derivePath(this.walletHdpath + i)
         .getWallet();
       const addr = `0x${wallet.getAddress().toString("hex")}`;
@@ -393,4 +394,4 @@ class HDWalletProvider {
   }
 }
 
-export = HDWalletProvider;
+export = Web3NodejsProvider;
