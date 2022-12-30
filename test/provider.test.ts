@@ -2,13 +2,13 @@ import assert from "assert";
 import Ganache from "ganache";
 import * as EthUtil from "ethereumjs-util";
 import Web3 from "web3";
-import HDWalletProvider from "..";
+import Web3NodejsProvider from "..";
 import { describe, it, before, after, afterEach } from "mocha";
 
 describe("HD Wallet Provider", function () {
   const web3 = new Web3();
   let ganacheProvider: any;
-  let provider: HDWalletProvider;
+  let provider: Web3NodejsProvider;
 
   before(() => {
     ganacheProvider = Ganache.provider({
@@ -49,7 +49,7 @@ describe("HD Wallet Provider", function () {
 
       const mnemonic =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider(mnemonic, ganacheProvider);
+      provider = new Web3NodejsProvider(mnemonic, ganacheProvider);
 
       assert.deepEqual(provider.getAddresses(), truffleDevAccounts);
       web3.setProvider(provider);
@@ -60,7 +60,7 @@ describe("HD Wallet Provider", function () {
 
     it("throws on invalid mnemonic", () => {
       try {
-        provider = new HDWalletProvider(
+        provider = new Web3NodejsProvider(
           "takoyaki is delicious",
           "http://localhost:8545"
         );
@@ -83,7 +83,7 @@ describe("HD Wallet Provider", function () {
           "9549f39decea7b7504e15572b2c6a72766df0281cea22bd1a3bc87166b1ca290"
       };
 
-      provider = new HDWalletProvider(privateKeys, ganacheProvider);
+      provider = new Web3NodejsProvider(privateKeys, ganacheProvider);
       web3.setProvider(provider);
 
       const addresses = provider.getAddresses();
@@ -112,7 +112,7 @@ describe("HD Wallet Provider", function () {
     it("provides for a private key", async () => {
       const privateKey =
         "3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580"; //random valid private key generated with ethkey
-      provider = new HDWalletProvider(privateKey, ganacheProvider);
+      provider = new Web3NodejsProvider(privateKey, ganacheProvider);
       web3.setProvider(provider);
 
       const addresses = provider.getAddresses();
@@ -143,7 +143,7 @@ describe("HD Wallet Provider", function () {
 
       const mnemonicPhrase =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         mnemonic: {
           phrase: mnemonicPhrase
         },
@@ -173,7 +173,7 @@ describe("HD Wallet Provider", function () {
 
       const mnemonicPhrase =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         mnemonic: mnemonicPhrase,
         provider: ganacheProvider
       });
@@ -200,7 +200,7 @@ describe("HD Wallet Provider", function () {
       ];
       const mnemonicPhrase =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         mnemonic: {
           phrase: mnemonicPhrase,
           password: "yummy"
@@ -218,7 +218,7 @@ describe("HD Wallet Provider", function () {
     it("provides for a default polling interval", () => {
       const mnemonicPhrase =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         mnemonic: {
           phrase: mnemonicPhrase
         },
@@ -240,7 +240,7 @@ describe("HD Wallet Provider", function () {
     it("provides for a custom polling interval", () => {
       const mnemonicPhrase =
         "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         mnemonic: {
           phrase: mnemonicPhrase
         },
@@ -273,7 +273,7 @@ describe("HD Wallet Provider", function () {
           "9549f39decea7b7504e15572b2c6a72766df0281cea22bd1a3bc87166b1ca290"
       };
 
-      provider = new HDWalletProvider({
+      provider = new Web3NodejsProvider({
         privateKeys,
         provider: ganacheProvider
       });
@@ -305,7 +305,7 @@ describe("HD Wallet Provider", function () {
     describe("instantiation errors", () => {
       it("throws on invalid providers", () => {
         try {
-          provider = new HDWalletProvider({
+          provider = new Web3NodejsProvider({
             mnemonic: {
               phrase:
                 "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
@@ -321,7 +321,7 @@ describe("HD Wallet Provider", function () {
 
       it("throws on invalid urls", () => {
         try {
-          provider = new HDWalletProvider({
+          provider = new Web3NodejsProvider({
             mnemonic: {
               phrase:
                 "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
@@ -336,7 +336,7 @@ describe("HD Wallet Provider", function () {
 
       it("throws on invalid mnemonic", () => {
         try {
-          provider = new HDWalletProvider({
+          provider = new Web3NodejsProvider({
             mnemonic: {
               phrase: "I am not a crook"
             },
