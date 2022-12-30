@@ -8,11 +8,11 @@ Note: This is fork of https://www.npmjs.com/package/@truffle/hdwallet-provider w
 ## Install
 
 ```
-$ npm install web3-provider-nodejs
+$ npm install web3-nodejs-provider
 ```
 
 ```
-$ yarn add web3-provider-nodejs
+$ yarn add web3-nodejs-provider
 ```
 
 ## Requirements
