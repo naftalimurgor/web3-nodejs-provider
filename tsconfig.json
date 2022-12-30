@@ -7,6 +7,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "strict": true,
+    "useUnknownInCatchVariables": false,
     "lib": [
       "es2019"
     ],
