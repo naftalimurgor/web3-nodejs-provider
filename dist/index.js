@@ -77,9 +77,9 @@ const eth_sig_util_1 = require("eth-sig-util");
 // of this behavior by passing `shareNonce=false` to the constructor.
 // See issue #65 for more
 const singletonNonceSubProvider = new nonce_tracker_1.default();
-class HDWalletProvider {
+class Web3NodejsProvider {
     constructor(...args) {
-        const _a = (0, getOptions_1.getOptions)(...args), { provider, url, providerOrUrl, addressIndex = 0, numberOfAddresses = 10, shareNonce = true, derivationPath = `m/44'/60'/0'/0/`, pollingInterval = 4000, chainId, chainSettings = {} } = _a, 
+        const _a = (0, getOptions_1.getOptions)(...args), { provider, url, providerOrUrl, addressIndex = 0, numberOfAddresses = 10, shareNonce = false, derivationPath = `m/44'/60'/0'/0/`, pollingInterval = 4000, chainId, chainSettings = {} } = _a, 
         // what's left is either a mnemonic or a list of private keys
         signingAuthority = __rest(_a, ["provider", "url", "providerOrUrl", "addressIndex", "numberOfAddresses", "shareNonce", "derivationPath", "pollingInterval", "chainId", "chainSettings"]);
         const mnemonic = (0, getMnemonic_1.getMnemonic)(signingAuthority);
@@ -92,16 +92,16 @@ class HDWalletProvider {
             pollingInterval
         });
         let providerToUse;
-        if (HDWalletProvider.isValidProvider(provider)) {
+        if (Web3NodejsProvider.isValidProvider(provider)) {
             providerToUse = provider;
         }
-        else if (HDWalletProvider.isValidProvider(url)) {
+        else if (Web3NodejsProvider.isValidProvider(url)) {
             providerToUse = url;
         }
         else {
             providerToUse = providerOrUrl;
         }
-        if (!HDWalletProvider.isValidProvider(providerToUse)) {
+        if (!Web3NodejsProvider.isValidProvider(providerToUse)) {
             throw new Error([
                 `No provider or an invalid provider was specified: '${providerToUse}'`,
                 "Please specify a valid provider or URL, using the http, https, " +
@@ -223,6 +223,7 @@ class HDWalletProvider {
                 cb(null, sig);
             }
         }));
+        // do away with share none thing
         !shareNonce
             ? this.engine.addProvider(new nonce_tracker_1.default())
             : this.engine.addProvider(singletonNonceSubProvider);
@@ -345,5 +346,5 @@ class HDWalletProvider {
         return false;
     }
 }
-module.exports = HDWalletProvider;
+module.exports = Web3NodejsProvider;
 //# sourceMappingURL=index.js.map

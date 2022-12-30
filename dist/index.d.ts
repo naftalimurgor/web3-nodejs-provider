@@ -1,7 +1,7 @@
 import ProviderEngine from "web3-provider-engine";
 import type { JSONRPCRequestPayload, JSONRPCResponsePayload } from "ethereum-protocol";
 import type { ConstructorArguments } from "./constructor/ConstructorArguments";
-declare class HDWalletProvider {
+declare class Web3NodejsProvider {
     private hdwallet?;
     private walletHdpath;
     private wallets;
@@ -21,4 +21,4 @@ declare class HDWalletProvider {
     getAddresses(): string[];
     static isValidProvider(provider: any): boolean;
 }
-export = HDWalletProvider;
+export = Web3NodejsProvider;
