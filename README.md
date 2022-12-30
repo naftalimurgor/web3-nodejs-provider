@@ -142,3 +142,13 @@ provider = new Web3NodejsProvider(privateKeys, "http://localhost:8545", 0, 2); /
 **NOTE: This is just an example. NEVER hard code production/mainnet private
 keys in your code or commit them to git. They should always be loaded from
 environment variables or a secure secret management system.**
+
+## Similar work
+Compose own providers (Made to work  with MetaMask Browser Wallet only): https://github.com/MetaMask/web3-provider-engine
+
+## Support
+If you wish to support this project, please do so on:
+
+1. BTC: `3AKZndQ3fgj48emakUXe81dyW7zTJQm7wv`
+2. LTC: `MQFsxZ42CD3HEyucM1jj2WM4xbYibYWsVg`
+3. ETH: `0xB61ED210326FEb11A1f7048c77c404553fCed702`
