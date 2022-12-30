@@ -7,6 +7,7 @@ export interface Mnemonic {
   phrase: MnemonicPhrase;
   password?: MnemonicPassword;
 }
+// @ts-ignore
 import type { Provider as LegacyProvider } from "web3/providers";
 type Eip1193Provider = {
   request: (options: {
