@@ -3,7 +3,7 @@ HD Wallet-enabled Web3 provider. Use it to sign transactions for addresses deriv
 
 Note: This is fork of https://www.npmjs.com/package/@truffle/hdwallet-provider with changes:
 - Explicitly provider `private` keys, `mnemomic` (or both)
-- Removed `shared Nonce` option
+- Removed `sharedNonce` option
 - `provider.stop` is handled by environment, needless to call `provider.stop()`
 ## Install
 
