@@ -1,4 +1,9 @@
 # web3-provider-nodejs
+
+<p align="center">
+  <img width="300" height="300" src="https://raw.githubusercontent.com/naftalimurgor/web3-nodejs-provider/main/logo_web3.png">
+</p>
+
 HD Wallet-enabled Web3 provider. Use it to sign transactions for addresses derived from a 12 or 24 word mnemonic.
 
 Note: This is fork of https://www.npmjs.com/package/@truffle/hdwallet-provider with changes:
