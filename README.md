@@ -147,8 +147,7 @@ environment variables or a secure secret management system.**
 Compose own providers (Made to work  with MetaMask Browser Wallet only): https://github.com/MetaMask/web3-provider-engine
 
 ## Support
-If you wish to support this project, please do so on:
+Please consider supporting this project by making donations via:
 
-1. BTC: `3AKZndQ3fgj48emakUXe81dyW7zTJQm7wv`
-2. LTC: `MQFsxZ42CD3HEyucM1jj2WM4xbYibYWsVg`
-3. ETH: `0xB61ED210326FEb11A1f7048c77c404553fCed702`
+1. Bitcoin: `3AKZndQ3fgj48emakUXe81dyW7zTJQm7wv`
+2. USDT(Ethereum): `0xB61ED210326FEb11A1f7048c77c404553fCed702`
